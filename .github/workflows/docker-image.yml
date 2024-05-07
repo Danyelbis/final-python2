@@ -1,0 +1,28 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+      
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag danyelbis/python-final:${{ github.run_number }} -${{ github.sha }}
+      
+    - name: login to DockerHub
+      run: docker login -u ${{ varible.user }} -p ${{ secrets.password }}
+      
+    - name: push to DockerHub
+      run: docker push danyelbis/python-final:${{ github.run_number }} -${{ github.sha }}
+
