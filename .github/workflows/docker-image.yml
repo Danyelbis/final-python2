@@ -21,7 +21,7 @@ jobs:
       run: docker build . --file Dockerfile --tag danyelbis/python-final:${{ github.run_number }} -${{ github.sha }}
       
     - name: login to DockerHub
-      run: docker login -u ${{ varible.user }} -p ${{ secrets.password }}
+      run: docker login -u ${{ varibles.user }} -p ${{ secrets.password }}
       
     - name: push to DockerHub
       run: docker push danyelbis/python-final:${{ github.run_number }} -${{ github.sha }}
